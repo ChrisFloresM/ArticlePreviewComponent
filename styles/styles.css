@@ -62,7 +62,7 @@ body {
 /* Component image */
 .component__img-container {
     min-width: 40%;
-/*    background-image: url("../img/drawers.jpg");*/
+    background-image: url("../img/drawers.jpg");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
