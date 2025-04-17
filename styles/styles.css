@@ -53,17 +53,16 @@ body {
 
 /* ================ Main component ================ */
 .component {
-    max-width: 690px;
+    max-width: 732px;
     display: flex;
     border-radius: 10px;
-    overflow: hidden;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.05);
 }
 
 /* Component image */
 .component__img-container {
     min-width: 40%;
-    background-image: url("../img/drawers.jpg");
+/*    background-image: url("../img/drawers.jpg");*/
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -78,14 +77,22 @@ body {
 
 /* Component info */
 .component__info-container {
-    padding: var(--spacing-200) 0 var(--spacing-200) var(--spacing-500);
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-300);
+}
+
+.component__info {
+    padding: var(--spacing-500) var(--spacing-500) 0 var(--spacing-500);
+}
+
+.component__info-text {
+    margin: var(--spacing-300) 0;
 }
 
 /* Profile */
 .component__info-profile {
+    padding: 0 var(--spacing-500) var(--spacing-500) var(--spacing-500);
     display: flex;
     align-items: center;
     gap: var(--spacing-200);
@@ -98,9 +105,12 @@ body {
 
 .component__share {
     margin-left: auto;
+    position: relative;
 }
 
 .component__btn-share {
+    position: relative;
+    z-index: 10;
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -115,12 +125,12 @@ body {
     color: var(--grey-500);
 }
 
-.component__btn-share:hover {
+.component__btn-share:hover, .component__btn-share.clicked {
     background-color: var(--grey-500);
     cursor: pointer;
 }
 
-.component__btn-share:hover svg {
+.component__btn-share:hover svg, .component__btn-share.clicked svg {
     color: var(--grey-200);
 }
 
@@ -140,6 +150,13 @@ body {
     color: var(--grey-900);
 }
 
+.text-preset-3 {
+    font-size: var(--preset-2-3-size);
+    line-height: var(--preset-2-3-lh);
+    letter-spacing: var(--preset-3-ls);
+    color: var(--grey-400);
+}
+
 .bold {
     font-weight: var(--bold);
 }
@@ -148,23 +165,109 @@ body {
     font-weight: var(--medium);
 }
 
+/* Social links */
+.component__social {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-200);
+    background-color: var(--grey-900);
+    transition: opacity 0.3s;
+    opacity: 0;
+}
+
+.component__social.mobile {
+    display: none;
+}
+
+.component__social.desktop {
+    padding: var(--spacing-200) var(--spacing-400);
+    border-radius: 10px;
+    box-shadow:
+            0 6px 16px rgba(0, 0, 0, 0.1),
+            0 3px 6px rgba(0, 0, 0, 0.05);
+    transform: translate(calc(-50% + var(--spacing-200)), calc(-100% - var(--spacing-400)));
+}
+
+.component__social.desktop::before {
+    content: '';
+    width: 32px;
+    height: 16px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--grey-900);
+    transform: translate(-50%, 100%);
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+}
+
+.component__social-links {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-200);
+}
+
+.component__social-links img {
+    max-width: 20px;
+}
+
 @media (max-width: 48rem) {
     html {
         font-size: 50%;
     }
-    .component__info-container {
-        padding: var(--spacing-500);
+    .component__info, .component__info-profile {
+        padding-left: var(--spacing-400);
     }
 }
-
 
 @media (max-width: 33rem) {
     .component {
         flex-direction: column;
     }
 
+    .component__info {
+        padding: var(--spacing-400) var(--spacing-400) 0 var(--spacing-400);
+    }
+
+    .component__info-profile {
+        padding: var(--spacing-400);
+    }
+
     .component__img-container {
         min-width: 100%;
         height: 200px;
     }
+
+    .component__social.desktop {
+        display: none;
+    }
+
+    .component__social.mobile {
+        display: flex;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 104px;
+        padding: var(--spacing-400);
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+}
+
+/* Styles for interactive social button */
+.component__social.hidden {
+    display: none;
+}
+
+.component__btn-share:hover, .component__btn-share.clicked {
+    background-color: var(--grey-500);
+    cursor: pointer;
+}
+
+.component__btn-share:hover svg, .component__btn-share.clicked svg {
+    color: var(--grey-200);
+}
+
+.component__social.fade-in {
+    opacity: 1;
 }
